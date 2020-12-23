@@ -1,0 +1,307 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="horizontal">
+
+    <!--Connect Button to establish serial data flow-->
+    <ImageButton
+        android:id="@+id/image_button_connect"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="25dp"
+        android:background="#fff"
+        android:contentDescription="Connection to Arduino"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/connect" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_button_connect"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_marginTop="10dp">
+
+        //Speedometer within
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <!--Layout holding start-stop button and speedometer-->
+            <RelativeLayout
+                android:id="@+id/column1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/image_button_start_stop"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="#fff"
+                    android:contentDescription="Stop Button"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/start_stop" />
+
+                <pl.pawelkleczkowski.customgauge.CustomGauge
+                    android:id="@+id/speed"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_below="@id/image_button_start_stop"
+                    android:layout_centerHorizontal="true"
+                    app:gaugeEndValue="120"
+                    app:gaugePointEndColor="#056f00"
+                    app:gaugePointStartColor="#2baf2b"
+                    app:gaugeStartAngle="135"
+                    app:gaugeStartValue="0"
+                    app:gaugeStrokeCap="ROUND"
+                    app:gaugeStrokeColor="#bdbdbd"
+                    app:gaugeStrokeWidth="10dp"
+                    app:gaugeSweepAngle="270" />
+
+                <TextView
+                    android:id="@+id/speed_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/image_button_start_stop"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_vertical"
+                    android:paddingTop="50dp"
+                    android:text="0"
+                    android:textColor="#000"
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:text="Km/Hr"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/speed_text"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        //Battery SOC within
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <!--Layout holding battery percentage and distance details-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dp"
+                android:layout_toRightOf="@id/column1"
+                android:orientation="vertical">
+
+                <!--The following are the views needed to build the battery percentage display-->
+                <TextView
+                    android:id="@+id/battery_percentage_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Battery % :"
+                    android:textColor="#000"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/battery_percentage_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/battery_percentage_title"
+                    android:text="0"
+                    android:textColor="#000"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/battery_percentage_display"
+                    style="@style/Widget.MaterialComponents.LinearProgressIndicator"
+                    android:layout_width="150dp"
+                    android:layout_height="10dp"
+                    android:layout_below="@id/battery_percentage_title"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    app:indicatorColor="#2baf2b"
+                    app:indicatorDirectionLinear="leftToRight"
+                    app:trackColor="#bdbdbd"
+                    app:trackCornerRadius="5dp"
+                    app:trackThickness="9dp" />
+
+                <!--The following layout will build the estimated distance layout-->
+                <RelativeLayout
+                    android:id="@+id/esti_dist_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/battery_percentage_display"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/estimated_distance_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Estimated Distance"
+                        android:textColor="#000"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/est_distance_box"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:layout_below="@id/estimated_distance_title"
+                        android:layout_marginLeft="10dp"
+                        android:theme="@style/Theme.MaterialComponents.Light"
+                        app:cardBackgroundColor="#fff"
+                        app:cardCornerRadius="5dp"
+                        app:strokeColor="@color/black"
+                        app:strokeWidth="3dp">
+
+                        <TextView
+                            android:id="@+id/estimated_distance_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="0"
+                            android:textColor="@color/black"
+                            android:textSize="30sp"
+                            android:textStyle="bold" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/estimated_distance_title"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@id/est_distance_box"
+                        android:text="Kilometers"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <!--The following layout will build the distance travelled layout-->
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/esti_dist_layout"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/travelled_distance_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Distance Travelled"
+                        android:textColor="#000"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/trav_distance_box"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:layout_below="@id/travelled_distance_title"
+                        android:layout_marginLeft="10dp"
+                        android:theme="@style/Theme.MaterialComponents.Light"
+                        app:cardBackgroundColor="#fff"
+                        app:cardCornerRadius="5dp"
+                        app:strokeColor="@color/black"
+                        app:strokeWidth="3dp">
+
+                        <TextView
+                            android:id="@+id/travelled_distance_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="0"
+                            android:textColor="@color/black"
+                            android:textSize="30sp"
+                            android:textStyle="bold" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/travelled_distance_title"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@id/trav_distance_box"
+                        android:text="Kilometers"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        //Fault History
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginBottom="20dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/faultHistoryButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    app:cardBackgroundColor="#fff"
+                    app:strokeColor="@color/black"
+                    app:strokeWidth="3dp">
+
+
+                    <TextView
+                        android:id="@+id/fault_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:rotation="270"
+                        android:text="Fault History"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@id/fault_text"
+                        android:text="	&#x2799;"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

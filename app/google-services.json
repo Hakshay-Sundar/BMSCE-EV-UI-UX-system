@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "966605979679",
+    "firebase_url": "https://bmsce-ev-testdb-default-rtdb.firebaseio.com",
+    "project_id": "bmsce-ev-testdb",
+    "storage_bucket": "bmsce-ev-testdb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:966605979679:android:0f057fd4c0c60234abd52a",
+        "android_client_info": {
+          "package_name": "com.example.final_year_project_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "966605979679-2r663umhqijsjqupjq6u2df2cifmoi85.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.final_year_project_android",
+            "certificate_hash": "bee1f2d7f47776dc94e02f2f840989dc28511dd3"
+          }
+        },
+        {
+          "client_id": "966605979679-fen8qq0mam070jfj1i54um6bd05vghqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAF5m4iJNPLIxekfhN_jNTd6wa56gY6Nbw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "966605979679-fen8qq0mam070jfj1i54um6bd05vghqs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
